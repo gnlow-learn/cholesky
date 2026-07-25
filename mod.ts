@@ -18,3 +18,36 @@ export const cholesky =
         })
     )
 }
+
+export const invertLowerTriangular =
+(L: number[][]) => {
+    const n = L.length
+    let Linv: number[][] = []
+
+    return Linv = arr(n).map(i => 
+        arr(n).map(j => {
+            if (i < j) return 0
+            if (i == j) return 1 / L[i][i]
+            
+            return -arr(i - j).reduce((sum, k) => {
+                const actualK = j + k
+                return sum + L[i][actualK] * Linv[actualK][j]
+            }, 0) / L[i][i]
+        })
+    )
+}
+
+export const choleskyInverse =
+(matrix: number[][]) => {
+    const L = cholesky(matrix)
+    const Linv = invertLowerTriangular(L)
+    const n = matrix.length
+
+    return arr(n).map(i => 
+        arr(n).map(j => 
+            arr(n).reduce((sum, k) => sum + Linv[k][i] * Linv[k][j], 0)
+        )
+    )
+}
+
+
