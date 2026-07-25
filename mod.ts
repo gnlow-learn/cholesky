@@ -64,7 +64,7 @@ export const choleskyInverse =
     return inv
 }
 
-export const getConditionalDistribution =
+export const getCondiDist =
 (sigma: number[][], givenValues: number[]) => {
     const totalDim = sigma.length
     const n = givenValues.length
@@ -104,15 +104,3 @@ export const getConditionalDistribution =
         variance: conditionalVariance,
     }
 }
-
-const sigma = [
-    [1.0,  0.49, 0.5 ],
-    [0.49, 1.0,  0.3 ],
-    [0.5,  0.3,  1.0 ],
-]
-
-const result = getConditionalDistribution(sigma, [1.0, 2.0])
-
-console.log(`C | (A=1, B=2) 의 조건부 분포:`)
-console.log(`평균 (Mean): ${result.mean.toFixed(4)}`)
-console.log(`분산 (Variance): ${result.variance.toFixed(4)}`)
